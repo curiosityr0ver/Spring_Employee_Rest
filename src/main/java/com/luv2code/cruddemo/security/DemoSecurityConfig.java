@@ -44,10 +44,11 @@ public class DemoSecurityConfig {
         http.authorizeHttpRequests(configurer ->
                 configurer
                         .requestMatchers(HttpMethod.GET, path).hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, path + "**").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET, path + "/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, path).hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.PUT, path).hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.DELETE, path + "**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/employees/**").hasRole("MANAGER")
+//                        .requestMatchers(HttpMethod.PUT, path + "/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, path + "/**").hasRole("ADMIN")
         );
 
         http.httpBasic(Customizer.withDefaults());
